@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import HomeScreen from "./screens/HomeScreen";
+import InsightsScreen from "./screens/InsightsScreen";
+import ToDoScreen from "./screens/ToDoScreen";
+import UpgradeScreen from "./screens/UpgradeScreen";
+import { UserProvider } from "./contexts/UserContext";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <UserProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Today" component={HomeScreen} />
+          <Tab.Screen name="Insights" component={InsightsScreen} />
+          <Tab.Screen name="To Do" component={ToDoScreen} />
+          <Tab.Screen name="Upgrade" component={UpgradeScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
